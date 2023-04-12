@@ -6,6 +6,14 @@ def test_get_users():
     assert response.headers['Content-Type'] == 'application/json; charset=utf-8'
     assert len(response.json()) > 0
 
+def test_get_users_auth():
+    url = 'https://gorest.co.in/public/v2/users'
+    headers = {'Authorization': 'Bearer fafad1e0cfad7fde47ecf8d14f114a66fd92c08023e08b74e14691097604960c'} # replace <your_access_token> with your actual token
+    response = requests.get(url, headers=headers)
+
+    assert response.status_code == 200
+    assert 'data' in response.json().keys()
+
 def test_get_user():
     response = requests.get('https://gorest.co.in/public/v2/users/902633')
     assert response.status_code == 200
